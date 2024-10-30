@@ -29,11 +29,11 @@ function mineCrypto() {
     updateDisplay();
 }
 
-// Function to sell cryptocurrency for cash
+// Function to sell all cryptocurrency for cash
 function sellCrypto() {
     if (cryptoAmount > 0) {
-        cashAmount += cryptoAmount * exchangeRate;
-        cryptoAmount = 0;
+        cashAmount += cryptoAmount * exchangeRate; // Sell at exchange rate
+        cryptoAmount = 0; // Reset crypto amount after selling
         sellSound.play(); // Play selling sound
         updateDisplay();
     }
@@ -81,30 +81,19 @@ function simulateMarket() {
     }, 5000); // Update every 5 seconds
 }
 
-// Function to generate cash based on cryptocurrency mined
-function generateCash() {
-    setInterval(() => {
-        if (cryptoAmount > 0) {
-            cashAmount += cryptoAmount * 0.01; // Generate 1% of crypto amount as cash every 2 seconds
-            notificationSound.play(); // Play notification sound when cash is generated
-            updateDisplay();
-        }
-    }, 2000); // Generate cash every 2 seconds
-}
-
-// Game loop
+// Game loop for mining
 setInterval(() => {
     mineCrypto();
 }, 1000); // Mine every second
 
 // Event listeners
+document.getElementById('sell-button').addEventListener('click', sellCrypto);
 document.getElementById('buy-rig').addEventListener('click', buyRig);
 document.getElementById('hire-worker').addEventListener('click', hireWorker);
 document.getElementById('prestige-button').addEventListener('click', prestige);
 
-// Start the market simulation and cash generation
+// Start the market simulation
 simulateMarket();
-generateCash();
 
 // Load game state from localStorage
 function loadGame() {
