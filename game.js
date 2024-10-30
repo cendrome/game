@@ -24,8 +24,10 @@ function updateDisplay() {
 // Function to mine cryptocurrency
 function mineCrypto() {
     const miningOutput = (miningRigCount * 0.1 + workerCount * 0.05) * miningBuff; // Example output
-    cryptoAmount += miningOutput;
-    mineSound.play(); // Play mining sound
+    if (miningOutput > 0) {
+        cryptoAmount += miningOutput; // Update crypto amount
+        mineSound.play(); // Play mining sound only if there is output
+    }
     updateDisplay();
 }
 
