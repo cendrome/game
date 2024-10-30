@@ -27,8 +27,8 @@ function mineCrypto() {
     if (miningOutput > 0) {
         cryptoAmount += miningOutput; // Update crypto amount
         mineSound.play(); // Play mining sound only if there is output
+        updateDisplay(); // Update display after mining
     }
-    updateDisplay();
 }
 
 // Function to sell all cryptocurrency for cash
@@ -37,7 +37,7 @@ function sellCrypto() {
         cashAmount += cryptoAmount * exchangeRate; // Sell at exchange rate
         cryptoAmount = 0; // Reset crypto amount after selling
         sellSound.play(); // Play selling sound
-        updateDisplay();
+        updateDisplay(); // Update display after selling
     }
 }
 
@@ -47,7 +47,7 @@ function buyRig() {
         cashAmount -= 10;
         miningRigCount++;
         upgradeSound.play(); // Play upgrade sound
-        updateDisplay();
+        updateDisplay(); // Update display after purchasing
     }
 }
 
@@ -57,7 +57,7 @@ function hireWorker() {
         cashAmount -= 50;
         workerCount++;
         upgradeSound.play(); // Play upgrade sound
-        updateDisplay();
+        updateDisplay(); // Update display after hiring
     }
 }
 
@@ -71,7 +71,7 @@ function prestige() {
         exchangeRate = 1; // Reset to default
         miningBuff *= 1.5; // Increase mining efficiency
         prestigeSound.play(); // Play prestige sound
-        updateDisplay();
+        updateDisplay(); // Update display after prestige
     }
 }
 
@@ -79,14 +79,14 @@ function prestige() {
 function simulateMarket() {
     setInterval(() => {
         exchangeRate = Math.random() * (3 - 0.5) + 0.5; // Random rate between 0.5 and 3
-        updateDisplay();
+        updateDisplay(); // Update display after market changes
     }, 5000); // Update every 5 seconds
 }
 
 // Game loop for mining
 setInterval(() => {
-    mineCrypto();
-}, 1000); // Mine every second
+    mineCrypto(); // Mine cryptocurrency every second
+}, 1000);
 
 // Event listeners
 document.getElementById('sell-button').addEventListener('click', sellCrypto);
@@ -107,7 +107,7 @@ function loadGame() {
         miningRigCount = savedGame.miningRigCount;
         workerCount = savedGame.workerCount;
         miningBuff = savedGame.miningBuff;
-        updateDisplay();
+        updateDisplay(); // Update display with saved game data
     }
 }
 
