@@ -4,6 +4,13 @@ let exchangeRate = 1;
 let miningRigCount = 0;
 let workerCount = 0;
 
+// Buffs from prestige
+let miningBuff = 1;
+
+// Sound effects
+const mineSound = document.getElementById('mine-sound');
+const sellSound = document.getElementById('sell-sound');
+
 // Function to update display
 function updateDisplay() {
     document.getElementById('crypto-amount').innerText = cryptoAmount.toFixed(2);
@@ -13,8 +20,9 @@ function updateDisplay() {
 
 // Function to mine cryptocurrency
 function mineCrypto() {
-    const miningOutput = (miningRigCount * 0.1) + (workerCount * 0.05); // Example output
+    const miningOutput = (miningRigCount * 0.1 + workerCount * 0.05) * miningBuff; // Example output
     cryptoAmount += miningOutput;
+    mineSound.play(); // Play mining sound
     updateDisplay();
 }
 
@@ -23,6 +31,7 @@ function sellCrypto() {
     if (cryptoAmount > 0) {
         cashAmount += cryptoAmount * exchangeRate;
         cryptoAmount = 0;
+        sellSound.play(); // Play selling sound
         updateDisplay();
     }
 }
@@ -53,7 +62,7 @@ function prestige() {
         miningRigCount = 0;
         workerCount = 0;
         exchangeRate = 1; // Reset to default
-        // Apply buffs, e.g., increase mining speed
+        miningBuff *= 1.5; // Increase mining efficiency
         updateDisplay();
     }
 }
@@ -78,3 +87,36 @@ document.getElementById('prestige-button').addEventListener('click', prestige);
 
 // Start the market simulation
 simulateMarket();
+
+// Load game state from localStorage
+function loadGame() {
+    const savedGame = JSON.parse(localStorage.getItem('cryptoMiningGame'));
+    if (savedGame) {
+        cryptoAmount = savedGame.cryptoAmount;
+        cashAmount = savedGame.cashAmount;
+        exchangeRate = savedGame.exchangeRate;
+        miningRigCount = savedGame.miningRigCount;
+        workerCount = savedGame.workerCount;
+        miningBuff = savedGame.miningBuff;
+        updateDisplay();
+    }
+}
+
+// Save game state to localStorage
+function saveGame() {
+    const gameState = {
+        cryptoAmount,
+        cashAmount,
+        exchangeRate,
+        miningRigCount,
+        workerCount,
+        miningBuff,
+    };
+    localStorage.setItem('cryptoMiningGame', JSON.stringify(gameState));
+}
+
+// Automatically save the game every 10 seconds
+setInterval(saveGame, 10000);
+
+// Load game when the page is refreshed
+loadGame();
