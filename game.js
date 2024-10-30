@@ -10,6 +10,9 @@ let miningBuff = 1;
 // Sound effects
 const mineSound = document.getElementById('mine-sound');
 const sellSound = document.getElementById('sell-sound');
+const upgradeSound = document.getElementById('upgrade-sound');
+const prestigeSound = document.getElementById('prestige-sound');
+const notificationSound = document.getElementById('notification-sound');
 
 // Function to update display
 function updateDisplay() {
@@ -41,6 +44,7 @@ function buyRig() {
     if (cashAmount >= 10) {
         cashAmount -= 10;
         miningRigCount++;
+        upgradeSound.play(); // Play upgrade sound
         updateDisplay();
     }
 }
@@ -50,6 +54,7 @@ function hireWorker() {
     if (cashAmount >= 50) {
         cashAmount -= 50;
         workerCount++;
+        upgradeSound.play(); // Play upgrade sound
         updateDisplay();
     }
 }
@@ -63,6 +68,7 @@ function prestige() {
         workerCount = 0;
         exchangeRate = 1; // Reset to default
         miningBuff *= 1.5; // Increase mining efficiency
+        prestigeSound.play(); // Play prestige sound
         updateDisplay();
     }
 }
