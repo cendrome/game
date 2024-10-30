@@ -23,12 +23,13 @@ function updateDisplay() {
 
 // Function to mine cryptocurrency
 function mineCrypto() {
-    const miningOutput = (miningRigCount * 0.1 + workerCount * 0.05) * miningBuff; // Example output
+    // Mining output calculation
+    const miningOutput = ((miningRigCount * 0.1) + (workerCount * 0.05)) * miningBuff; // Example output
+    cryptoAmount += miningOutput; // Update crypto amount
     if (miningOutput > 0) {
-        cryptoAmount += miningOutput; // Update crypto amount
         mineSound.play(); // Play mining sound only if there is output
-        updateDisplay(); // Update display after mining
     }
+    updateDisplay(); // Update display after mining
 }
 
 // Function to sell all cryptocurrency for cash
@@ -86,7 +87,7 @@ function simulateMarket() {
 // Game loop for mining
 setInterval(() => {
     mineCrypto(); // Mine cryptocurrency every second
-}, 1000);
+}, 1000); // Execute mining every 1000ms (1 second)
 
 // Event listeners
 document.getElementById('sell-button').addEventListener('click', sellCrypto);
