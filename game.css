@@ -26,3 +26,9 @@ button {
 button:hover {
     background: #21a1f1;
 }
+
+canvas {
+    margin-top: 20px;
+    width: 100%;
+    height: 300px;
+}
