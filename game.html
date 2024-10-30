@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Mining Idle Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="game-container">
+        <h1>Crypto Mining Idle Game</h1>
+        <div id="resources">
+            <p>Cryptocurrency: <span id="crypto-amount">0</span></p>
+            <p>Cash: <span id="cash-amount">0</span></p>
+            <p>Exchange Rate: <span id="exchange-rate">1</span></p>
+        </div>
+        <div id="upgrades">
+            <h2>Upgrades</h2>
+            <button id="buy-rig">Buy Mining Rig (Cost: 10 Cash)</button>
+            <button id="hire-worker">Hire Worker (Cost: 50 Cash)</button>
+        </div>
+        <div id="prestige">
+            <h2>Prestige</h2>
+            <button id="prestige-button">Prestige (Reset for Buffs)</button>
+        </div>
+        <div id="market-trends">
+            <h2>Market Trends</h2>
+            <canvas id="market-chart"></canvas>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>
